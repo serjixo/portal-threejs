@@ -1,12 +1,10 @@
 import Experience from "../Experience.js";
 import Environment from "./Environment.js";
-import Floor from "./Floor.js";
-import Fox from "./Fox.js";
-import * as THREE from 'three'
 import LoadingOverlay from "../utils/LoadingOverlay.js";
-import PointsOfInterest from "./PointsOfInterest.js";
 import Raycaster from "../utils/Raycaster.js";
 import SceneReady from "../utils/SceneReady.js";
+import Portal from "./Portal.js";
+import SquareTest from "./SquareTest.js";
 
 let worldInstance = null
 export default class World {
@@ -17,25 +15,17 @@ export default class World {
         worldInstance = this
         this.experience = new Experience()
         this.scene = this.experience.scene
-        // this.test()
     }
 
-    test() {
-        const testMesh = new THREE.Mesh(new THREE.BoxGeometry(1, 1, 1), new THREE.MeshStandardMaterial())
-        // testMesh.castShadow = true
-        testMesh.receiveShadow = true
-        this.scene.add(testMesh)
-    }
 
     onResourcesLoaded = () => {
         this.loadingOverlay = new LoadingOverlay()
 
         this.raycaster = new Raycaster()
-        this.test()
-        // this.floor = new Floor()
-        // this.fox = new Fox()
-        this.environment = new Environment()
 
+        // this.square = new SquareTest()
+        this.portal = new Portal()
+        // this.environment = new Environment()
         this.loadingOverlay.setTransparencyAnimated(0)
 
         this.sceneReady = new SceneReady()

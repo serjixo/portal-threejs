@@ -10,12 +10,12 @@ export default class Environment {
         this.debug = this.experience.debug
         if (this.debug.active) {
             this.debugFolder = this.debug.ui.addFolder('environment')
-
-
         }
 
         this.setSunLight()
-        this.setEnvironmentMap()
+        if (this.resources.items.environmentMap) {
+            this.setEnvironmentMap()
+        }
     }
 
     setSunLight() {
@@ -39,25 +39,25 @@ export default class Environment {
 
         this.environmentMap = {}
         this.environmentMap.intensity = 0.8
+
+        // if (this.resources.items.environmentMap) {
         this.environmentMap.texture = this.resources.items.environmentMap
         this.environmentMap.texture.encoding = THREE.sRGBEncoding
-
         this.scene.environment = this.environmentMap.texture
         // }
 
         this.environmentMap.updateMaterials = () => {
             this.scene.traverse((child) => {
                 if (child instanceof THREE.Mesh && child.material instanceof THREE.MeshStandardMaterial) {
+                    // if (this.resources.items.environmentMap) {
                     child.material.envMap = this.environmentMap.texture
+                    // }
                     child.material.envMapIntensity = this.environmentMap.intensity
                     child.material.needsUpdate = true
                 }
             })
         }
         this.environmentMap.updateMaterials()
-        // this.updateMaterial()
-
-        //debug
 
         if (this.debug.active) {
             this.debugFolder.add(this.environmentMap, 'intensity').name('envMapIntensity').min(0).max(4).step(0.001).onChange(this.environmentMap.updateMaterials)
@@ -65,13 +65,4 @@ export default class Environment {
 
     }
 
-    /*    updateMaterial() {
-            this.scene.traverse((child) => {
-                if (child instanceof THREE.Mesh && child.material instanceof THREE.MeshStandardMaterial) {
-                    child.material.envMap = this.environmentMap.texture
-                    child.material.envMapIntensity = this.environmentMap.intensity
-                    child.material.needsUpdate = true
-                }
-            })
-        }*/
 }
