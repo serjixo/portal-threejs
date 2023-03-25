@@ -8,6 +8,7 @@ export default class Renderer {
         this.sizes = this.experience.sizes
         this.scene = this.experience.scene
         this.camera = this.experience.camera
+        this.debug = this.experience.debug
         this.setInstance()
     }
 
@@ -22,10 +23,16 @@ export default class Renderer {
         this.instance.toneMappingExposure = 1.75
         this.instance.shadowMap.enabled = true
         this.instance.shadowMap.type = THREE.PCFSoftShadowMap
-        this.instance.setClearColor('#211d20')
+        this.instance.setClearColor('#A7CB54')
         this.instance.setSize(this.sizes.width, this.sizes.height)
         this.instance.setPixelRatio(Math.min(this.sizes.pixelRatio, 2))
 
+        if (this.debug.active) {
+            let debugOptions = {}
+            debugOptions.clearColor = '#A7CB54'
+            this.debugFolder = this.debug.ui.addFolder('renderer')
+            this.debugFolder.addColor(debugOptions, 'clearColor').name('clearColor').onChange(()=>this.instance.setClearColor(debugOptions.clearColor))
+        }
     }
 
     onResize = () => {
@@ -35,5 +42,6 @@ export default class Renderer {
 
     onUpdate = () => {
         this.instance.render(this.scene, this.camera.instance)
+        // this.instance.setClearColor(this.debugOptions.clearColor)
     }
 }

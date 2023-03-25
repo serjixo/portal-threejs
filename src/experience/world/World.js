@@ -5,6 +5,7 @@ import Raycaster from "../utils/Raycaster.js";
 import SceneReady from "../utils/SceneReady.js";
 import Portal from "./Portal.js";
 import SquareTest from "./SquareTest.js";
+import FireFlies from "./FireFlies.js";
 
 let worldInstance = null
 export default class World {
@@ -25,6 +26,7 @@ export default class World {
 
         // this.square = new SquareTest()
         this.portal = new Portal()
+        this.fireFlies = new FireFlies()
         // this.environment = new Environment()
         this.loadingOverlay.setTransparencyAnimated(0)
 
