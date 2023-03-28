@@ -25,19 +25,19 @@ export default class FireFlies {
             uniforms:
                 {
                     uTime: {value: 0},
-                    uPixelRatio: {value: Math.min(window.devicePixelRatio, 2)},
-                    uSize: {value: 100}
+                    uPixelRatio: {value: this.pixelRatio},
+                    uSize: {value: 250}
                 },
             vertexShader: firefliesVertexShader,
             fragmentShader: firefliesFragmentShader,
             transparent: true,
-            blending: THREE.AdditiveBlending,
+            // blending: THREE.AdditiveBlending,
             depthWrite: false
         })
         const firefliesMesh = new THREE.Points(this.firefliesGeometry, this.firefliesMaterial)
 
         if (this.debug.active) {
-            this.debugFolder.add(this.firefliesMaterial.uniforms.uSize, 'value').name('size').min(0).max(300).step(1)
+            this.debugFolder.add(this.firefliesMaterial.uniforms.uSize, 'value').name('size').min(0).max(500).step(1)
         }
         this.experience.scene.add(firefliesMesh)
     }
@@ -48,7 +48,7 @@ export default class FireFlies {
 
         for (let i = 0; i < positions.length; i += 3) {
             positions[i + 0] = (Math.random() - 0.5) * 5
-            positions[i + 1] = Math.random() * 3
+            positions[i + 1] = (Math.random()) * 3
             positions[i + 2] = (Math.random() - 0.5) * 5
 
             scale[i] = Math.random()
