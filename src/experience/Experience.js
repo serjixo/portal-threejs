@@ -39,7 +39,6 @@ export default class Experience {
         this.world = new World()
 
 
-
         //Event Observers
         //const resources loaded
         const resourcesObserver = new ResourcesObserver()
@@ -51,13 +50,10 @@ export default class Experience {
         this.resizeObserver.subscribe(this.sizes.onResize)
         this.resizeObserver.subscribe(this.camera.onResize)
         this.resizeObserver.subscribe(this.renderer.onResize)
-        // TODO  set resize pixel ratio in order to make the fireflies adapt size when passing from a screen with pr of 0ne or two.
-        // this.resizeObserver.subscribe(this.world.fireFlies.onResize)
 
         //time update
         const timeObserver = new TimeObserver()
         timeObserver.subscribe(this.update)
-
 
 
         //Loading sources
@@ -70,7 +66,7 @@ export default class Experience {
         this.camera.update()
         this.renderer.onUpdate()
         this.world.onUpdate(time)
-        if(this.world.fireFlies)
+        if (this.world.fireFlies)
             this.world.fireFlies.onUpdate(time)
         this.statsWrapper.stats.end()
     }

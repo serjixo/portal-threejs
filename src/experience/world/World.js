@@ -1,11 +1,10 @@
 import Experience from "../Experience.js";
-import Environment from "./Environment.js";
 import LoadingOverlay from "../utils/LoadingOverlay.js";
 import Raycaster from "../utils/Raycaster.js";
 import SceneReady from "../utils/SceneReady.js";
 import Portal from "./Portal.js";
-import SquareTest from "./SquareTest.js";
 import FireFlies from "./FireFlies.js";
+import ResizeObserver from "../utils/ResizeObserver.js";
 
 let worldInstance = null
 export default class World {
@@ -17,6 +16,7 @@ export default class World {
         this.loadingOverlay = new LoadingOverlay()
         this.experience = new Experience()
         this.scene = this.experience.scene
+        this.resizeObserver = new ResizeObserver()
     }
 
 
@@ -29,7 +29,7 @@ export default class World {
         this.portal = new Portal()
         this.fireFlies = new FireFlies()
         // this.environment = new Environment()
-
+        this.resizeObserver.subscribe(this.fireFlies.onResize)
 
         this.sceneReady = new SceneReady()
         this.loadingOverlay.setTransparencyAnimated(0)

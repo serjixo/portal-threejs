@@ -59,6 +59,7 @@ export default class FireFlies {
 
     onResize = () => {
         this.pixelRatio = this.experience.renderer.getPixelRatio()
+        console.log('called resize of pixel on fireflies')
     }
 
     onUpdate = (time) => {
