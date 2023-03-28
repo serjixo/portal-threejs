@@ -23,7 +23,9 @@ export default class LoadingOverlay {
                 uAlpha: {
                     value: 1
                 }
-            }
+            },
+            depthWrite:false,
+            // depthTest: true
         })
     }
 
@@ -44,7 +46,8 @@ export default class LoadingOverlay {
                 ease: 'slow'
             }
 
-        ).then(() => this.destroy())
+        )
+            // .then(() => this.destroy())
 
 
 
