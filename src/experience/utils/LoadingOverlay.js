@@ -39,11 +39,18 @@ export default class LoadingOverlay {
     setTransparencyAnimated(transparency) {
         gsap.to(this.material.uniforms.uAlpha,
             {
-                duration: 3,
+                duration: 4,
                 value: transparency,
+                ease: 'slow'
             }
-        )
+
+        ).then(() => this.destroy())
+
+
 
     }
 
+    destroy() {
+        this.experience.scene.remove(this.mesh)
+    }
 }

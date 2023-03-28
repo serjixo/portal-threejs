@@ -25,7 +25,7 @@ export default class Renderer {
         this.instance.shadowMap.type = THREE.PCFSoftShadowMap
         this.instance.setClearColor('#A7CB54')
         this.instance.setSize(this.sizes.width, this.sizes.height)
-        this.instance.setPixelRatio(Math.min(this.sizes.pixelRatio, 2))
+        this.instance.setPixelRatio(this.getPixelRatio())
 
         if (this.debug.active) {
             let debugOptions = {}
@@ -33,6 +33,9 @@ export default class Renderer {
             this.debugFolder = this.debug.ui.addFolder('renderer')
             this.debugFolder.addColor(debugOptions, 'clearColor').name('clearColor').onChange(()=>this.instance.setClearColor(debugOptions.clearColor))
         }
+    }
+    getPixelRatio(){
+        return Math.min(this.sizes.pixelRatio, 2)
     }
 
     onResize = () => {

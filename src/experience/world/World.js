@@ -14,13 +14,14 @@ export default class World {
             return worldInstance
         }
         worldInstance = this
+        this.loadingOverlay = new LoadingOverlay()
         this.experience = new Experience()
         this.scene = this.experience.scene
     }
 
 
     onResourcesLoaded = () => {
-        this.loadingOverlay = new LoadingOverlay()
+
 
         this.raycaster = new Raycaster()
 
@@ -28,9 +29,10 @@ export default class World {
         this.portal = new Portal()
         this.fireFlies = new FireFlies()
         // this.environment = new Environment()
-        this.loadingOverlay.setTransparencyAnimated(0)
+
 
         this.sceneReady = new SceneReady()
+        this.loadingOverlay.setTransparencyAnimated(0)
         // this.pointsOfInterest = new PointsOfInterest()
     }
 
