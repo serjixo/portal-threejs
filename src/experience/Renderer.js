@@ -23,13 +23,13 @@ export default class Renderer {
         this.instance.toneMappingExposure = 1.75
         this.instance.shadowMap.enabled = true
         this.instance.shadowMap.type = THREE.PCFSoftShadowMap
-        this.instance.setClearColor('#A7CB54')
+        this.instance.setClearColor('#2a2c26')
         this.instance.setSize(this.sizes.width, this.sizes.height)
         this.instance.setPixelRatio(this.getPixelRatio())
 
         if (this.debug.active) {
             let debugOptions = {}
-            debugOptions.clearColor = '#A7CB54'
+            debugOptions.clearColor = '#2a2c26'
             this.debugFolder = this.debug.ui.addFolder('renderer')
             this.debugFolder.addColor(debugOptions, 'clearColor').name('clearColor').onChange(()=>this.instance.setClearColor(debugOptions.clearColor))
         }

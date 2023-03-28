@@ -70,6 +70,8 @@ export default class Experience {
         this.camera.update()
         this.renderer.onUpdate()
         this.world.onUpdate(time)
+        if(this.world.fireFlies)
+            this.world.fireFlies.onUpdate(time)
         this.statsWrapper.stats.end()
     }
 

@@ -17,25 +17,16 @@ export default class FireFlies {
     }
 
     createGeometries() {
-        const firefliesGeometry = new THREE.BufferGeometry()
+        this.firefliesGeometry = new THREE.BufferGeometry()
         const numberFireflies = 40
-        this.positionGeometries(numberFireflies, firefliesGeometry);
+        this.positionGeometries(numberFireflies, this.firefliesGeometry);
 
-/*        const firefliesMaterial = new THREE.ShaderMaterial({
-            uniforms: {
-                uPixelRatio: {value: this.pixelRatio},
-                uSize:{value:100}
-            },
-            vertexShader: firefliesVertexShader,
-            fragmentShader: firefliesFragmentShader,
-        })*/
-        // Material
-        const firefliesMaterial = new THREE.ShaderMaterial({
+        this.firefliesMaterial = new THREE.ShaderMaterial({
             uniforms:
                 {
-                    uTime: { value: 0 },
-                    uPixelRatio: { value: Math.min(window.devicePixelRatio, 2) },
-                    uSize: { value: 100 }
+                    uTime: {value: 0},
+                    uPixelRatio: {value: Math.min(window.devicePixelRatio, 2)},
+                    uSize: {value: 100}
                 },
             vertexShader: firefliesVertexShader,
             fragmentShader: firefliesFragmentShader,
@@ -43,27 +34,34 @@ export default class FireFlies {
             blending: THREE.AdditiveBlending,
             depthWrite: false
         })
-        // firefliesMaterial.transparent = true
-        const firefliesMesh = new THREE.Points(firefliesGeometry, firefliesMaterial)
+        const firefliesMesh = new THREE.Points(this.firefliesGeometry, this.firefliesMaterial)
 
         if (this.debug.active) {
-            this.debugFolder.add(firefliesMaterial.uniforms.uSize, 'value').name('size').min(0).max(100).step(1)
+            this.debugFolder.add(this.firefliesMaterial.uniforms.uSize, 'value').name('size').min(0).max(300).step(1)
         }
         this.experience.scene.add(firefliesMesh)
     }
 
     positionGeometries(numberFireflies, fireflies) {
         const positions = new Float32Array(numberFireflies * 3)
+        const scale = new Float32Array(numberFireflies)
 
         for (let i = 0; i < positions.length; i += 3) {
             positions[i + 0] = (Math.random() - 0.5) * 5
             positions[i + 1] = Math.random() * 3
             positions[i + 2] = (Math.random() - 0.5) * 5
+
+            scale[i] = Math.random()
         }
         fireflies.setAttribute('position', new THREE.BufferAttribute(positions, 3))
+        fireflies.setAttribute('aScale', new THREE.BufferAttribute(positions, 1))
     }
 
     onResize = () => {
         this.pixelRatio = this.experience.renderer.getPixelRatio()
+    }
+
+    onUpdate = (time) => {
+        this.firefliesMaterial.uniforms.uTime.value = time.elapsedTime
     }
 }
