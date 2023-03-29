@@ -31,7 +31,7 @@ export default class Experience {
 
         //Setup
         this.debug = new Debug()
-        if(this.debug.active)
+        if (this.debug.active)
             this.statsWrapper = new StatsWrapper()
         this.sizes = new Sizes()
         this.scene = new THREE.Scene()
@@ -63,7 +63,7 @@ export default class Experience {
     }
 
     update = (time) => {
-        if(this.debug.active)
+        if (this.debug.active)
             this.statsWrapper.stats.begin()
         this.camera.update()
         this.renderer.onUpdate()
@@ -72,7 +72,7 @@ export default class Experience {
             this.world.fireFlies.onUpdate(time)
         if (this.world.portal)
             this.world.portal.onUpdate(time)
-        if(this.debug.active)
+        if (this.debug.active)
             this.statsWrapper.stats.end()
     }
 
