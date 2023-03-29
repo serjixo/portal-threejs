@@ -68,6 +68,9 @@ export default class Experience {
         this.world.onUpdate(time)
         if (this.world.fireFlies)
             this.world.fireFlies.onUpdate(time)
+        if (this.world.portal)
+            this.world.portal.onUpdate(time)
+
         this.statsWrapper.stats.end()
     }
 

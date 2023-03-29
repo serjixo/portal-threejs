@@ -26,7 +26,7 @@ export default class FireFlies {
                 {
                     uTime: {value: 0},
                     uPixelRatio: {value: this.pixelRatio},
-                    uSize: {value: 250}
+                    uSize: {value: 250 }
                 },
             vertexShader: firefliesVertexShader,
             fragmentShader: firefliesFragmentShader,
